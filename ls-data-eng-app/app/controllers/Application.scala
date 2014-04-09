@@ -10,9 +10,14 @@ object Application extends Controller {
 
   def index = Action {
     val orders = Order.allOrders()
+    val gross = orders.size match {
+      case 0 => java.math.BigDecimal.valueOf(0)
+      case _ => orders.map(order =>
+        order.item.price.multiply(java.math.BigDecimal.valueOf(order.quantity))).reduce((total, cur) =>
+        total.add(cur))
+    }
     Ok(views.html.index(orders, Purchaser.allPurchasers(), Merchant.allMerchants(),
-      Item.allItems(),
-      orders.map(order => order.item.price.multiply(java.math.BigDecimal.valueOf(order.quantity))).reduce((total, cur) => total.add(cur))))
+      Item.allItems(), gross))
   }
 
   def upload = Action(parse.multipartFormData) { request =>
