@@ -1,0 +1,110 @@
+@(orders: List[Order], purchasers: List[Purchaser], merchants: List[Merchant], items: List[Item], gross: java.math.BigDecimal)
+
+@import helper._
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>LivingSocial Data Loader</title>
+        <script type="text/javascript" src="@routes.Assets.at("/javascripts/jquery-1.9.0.min.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("/javascripts/jquery-ui.min.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("/javascripts/jquery.ui.tabs.min.js")"></script>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <script>
+            $(function() {
+            $( "#tabs" ).tabs();
+            });
+        </script>
+    </head>
+    <body>
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-1">All Orders</a></li>
+            <li><a href="#tabs-2">All Customers</a></li>
+            <li><a href="#tabs-3">All Merchants</a></li>
+            <li><a href="#tabs-4">All Items</a></li>
+        </ul>
+        <div id="tabs-1">
+            <table>
+                <tr class="table_header">
+                    <td>Customer Name</td>
+                    <td>Item</td>
+                    <td>Price</td>
+                    <td>Quantity</td>
+                    <td>Merchant</td>
+                    <td>Merchant Address</td>
+                </tr>
+                @orders.map { order =>
+                <tr>
+                    <td>@order.customer.name</td>
+                    <td>@order.item.description</td>
+                    <td>@order.item.price</td>
+                    <td>@order.quantity</td>
+                    <td>@order.item.merchant.name</td>
+                    <td>@order.item.merchant.address</td>
+                </tr>
+                }
+            </table>
+        </div>
+        <div id="tabs-2">
+            <table>
+                <tr class="table_header">
+                    <td>Customer ID</td>
+                    <td>Customer Name</td>
+                </tr>
+                @purchasers.map { customer =>
+                <tr>
+                    <td>@customer.id</td>
+                    <td>@customer.name</td>
+                </tr>
+                }
+            </table>
+        </div>
+        <div id="tabs-3">
+            <table>
+                <tr class="table_header">
+                    <td>Merchant ID</td>
+                    <td>Merchant Name</td>
+                    <td>Merchant Address</td>
+                </tr>
+                @merchants.map { merchant =>
+                <tr>
+                    <td>@merchant.id</td>
+                    <td>@merchant.name</td>
+                    <td>@merchant.address</td>
+                </tr>
+                }
+            </table>
+        </div>
+        <div id="tabs-4">
+            <table>
+                <tr class="table_header">
+                    <td>Item ID</td>
+                    <td>Item Description</td>
+                    <td>Item Price</td>
+                    <td>Selling Merchant</td>
+                </tr>
+                @items.map { item =>
+                <tr>
+                    <td>@item.id</td>
+                    <td>@item.description</td>
+                    <td>@java.text.NumberFormat.getCurrencyInstance().format(item.price)</td>
+                    <td>@item.merchant.name</td>
+                </tr>
+                }
+            </table>
+        </div>
+    </div>
+
+    <h1>Gross Revenue: @java.text.NumberFormat.getCurrencyInstance().format(gross)</h1>
+
+    <h1>Upload Orders</h1>
+
+    @form(action = routes.Application.upload, 'enctype -> "multipart/form-data") {
+        <input type="file" name="orderfile">
+        <p><input type="submit" value="Upload Order File"></p>
+    }
+    </body>
+</html>
