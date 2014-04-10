@@ -4,12 +4,25 @@ Play Framework v2.2 Installed and Configured
 
 Starting the Application
 ---------------------------
-1. Change into the ls-data-eng-app directory.
-2. Type "play" and press enter.
-3. From the play prompt type "run" and press enter.
-4. Navigate to http://localhost:9000/ in your browser.
-5. You will receive a screen stating "Database 'default' needs evolution".  Click the "Apply this scipt now!" button.
-6. You will now be on the main screen of the application.
+On Linux/OS X:
+	1. Launch a terminal/console.
+	2. Change into the ls-data-eng-app directory.
+	2. Type "play" and press enter.
+	3. From the play prompt type "run" and press enter.
+	4. Navigate to http://localhost:9000/ in your browser.
+	5. After a small delay while the application compiles, you will receive a screen stating "Database 'default' needs evolution".  
+	6. Click the "Apply this scipt now!" button.
+	7. You will now be on the main screen of the application.
+	
+On Windows:
+	1. Launch a command prompt.
+	2. Change into the ls-data-eng-app directory.
+	2. Type "play.bat" and press enter.
+	3. From the play prompt type "run" and press enter.
+	4. Navigate to http://localhost:9000/ in your browser.
+	5. After a small delay while the application compiles, you will receive a screen stating "Database 'default' needs evolution".  
+	6. Click the "Apply this scipt now!" button.
+	7. You will now be on the main screen of the application.
 
 Using the Application
 ---------------------------
