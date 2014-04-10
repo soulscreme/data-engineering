@@ -1,0 +1,9 @@
+
+ls-data-eng-app/project/target/streams/runtime/managedClasspath/$global/export
+
+.idea
+*.log
+
+*.class
+
+ls-data-eng-app/logs/application.log
