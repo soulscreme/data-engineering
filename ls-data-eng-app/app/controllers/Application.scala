@@ -29,7 +29,7 @@ object Application extends Controller {
         }
       )
     }
-    Ok("File uploaded")
+    Redirect(routes.Application.index)
   }
 
   def lineToRecord(line: String) {
